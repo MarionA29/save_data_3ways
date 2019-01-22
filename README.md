@@ -34,13 +34,13 @@
                                         #######      BON COURAGE !    ######
                                      ##########                       ########					
 #################################################################################################                                                                                                                                      
-#						Projet ecris par :	                                                     					                                                                         
+#						Projet écrit par :	                                                     					                                                                         
 #  -POUZOL Maxime                                                                                                         	 
 #  -LE VOT Thomas														                                                                                                                          
 #  -AUDREN Marion														  
 #  -DE CARVALOS Enzo													         
 #	
-#     LIENS GOOGLESHEETS :
+#     LIEN GOOGLESHEETS :
 #      https://docs.google.com/spreadsheets/d/1VmrH1HvROJC5Aq1kM_oVO95SVIYrOfB7_oMyXkqicHU/htmlview#gid=0
 #
 #
