@@ -7,6 +7,7 @@ require 'open-uri'
 require 'pry'
 require 'json'
 require "google_drive"
+require 'csv'
 
 #######################################################################################################################
 #^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^   METHODS   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^#
@@ -32,7 +33,7 @@ class Townhall
       return cities
   end
 
-  #On définit la fonction pour récupérer les infos.
+#On définit la fonction pour récupérer les infos.
   def get_townhall_email(urls)
 
     #On définit les arrays principaux.
@@ -64,14 +65,14 @@ class Townhall
 
   end
 
-  ####méthode pour initialiser le json
+####méthode pour initialiser le json
   def save_as_JSON (objet)
     File.open("./db/email.JSON","w") do |f|
       f.write(objet.to_json)
     end
   end
 
-  ####méthode pour initialiser la sauvegarde spreadsheet
+####méthode pour initialiser la sauvegarde spreadsheet
   def save_as_spreadsheet(objet)
     session = GoogleDrive::Session.from_config("config.json") #définit la session Google Drive à partir de la configuration du fichier config.json
     ws = session.spreadsheet_by_key("1VmrH1HvROJC5Aq1kM_oVO95SVIYrOfB7_oMyXkqicHU").worksheets[0] #définit le Google sheet sur lequel on travaille
@@ -83,13 +84,40 @@ class Townhall
           ws[i,2]=value.values.join#remplit à la ligne i colonne 2(b) de la valeur
           i=i+1 #incrémentation, remplit chaque ligne à partir de i=2
       end
-      ws.save #sauvegarde dans le spreadsheet les elements de ws
+      ws.save #sauvegarde dans le spreadsheet les éléments de ws
     end
 
-  ####méthode perform
+####méthode pour initialiser le CSV
+  #def save_as_csv(objet)
+    #csv.write(objet.to_csv)
+    #csv << objet.join(",")
+
+    #CSV.open("./db/emails.csv", "w") do |csv|
+      #csv << objet.to_csv
+      #csv << objet.to_csv
+      #CSV.open("./db/emails.csv", "w") do |csv|
+      #  JSON.parse(File.open("./db/email.JSON","r").read).each do |hash|
+      #    csv << hash.values
+
+
+      #CSV.foreach("./db/emails.csv") do |row|
+      #puts row.inspect
+    #end
+    def save_as_csv (objet)
+        CSV.open("./db/emails.csv", "wb") do |csv|
+          objet.each do |element|
+            csv << [element.keys.join.to_s, element.values.join.to_s]
+          end
+        end
+      end
+
+
+
+####méthode perform
   def perform
-    save_as_JSON(get_townhall_email(get_townhall_urls))
-    save_as_spreadsheet(get_townhall_email(get_townhall_urls))
+    #save_as_JSON(get_townhall_email(get_townhall_urls))
+    #save_as_spreadsheet(get_townhall_email(get_townhall_urls))
+    save_as_csv(get_townhall_email(get_townhall_urls))
   end
 
 end
