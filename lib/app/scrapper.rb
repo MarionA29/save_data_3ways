@@ -95,7 +95,7 @@ class Townhall
             csv << [element.keys.join.to_s, element.values.join.to_s]
           end
         end
-      end
+    end
 
 
 
