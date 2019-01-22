@@ -67,7 +67,7 @@ class Townhall
 
 ####méthode pour initialiser le json
   def save_as_JSON (objet)
-    File.open("./db/email.JSON","w") do |f|
+    File.open("./db/emails.JSON","w") do |f|
       f.write(objet.to_json)
     end
   end
@@ -88,21 +88,7 @@ class Townhall
     end
 
 ####méthode pour initialiser le CSV
-  #def save_as_csv(objet)
-    #csv.write(objet.to_csv)
-    #csv << objet.join(",")
 
-    #CSV.open("./db/emails.csv", "w") do |csv|
-      #csv << objet.to_csv
-      #csv << objet.to_csv
-      #CSV.open("./db/emails.csv", "w") do |csv|
-      #  JSON.parse(File.open("./db/email.JSON","r").read).each do |hash|
-      #    csv << hash.values
-
-
-      #CSV.foreach("./db/emails.csv") do |row|
-      #puts row.inspect
-    #end
     def save_as_csv (objet)
         CSV.open("./db/emails.csv", "wb") do |csv|
           objet.each do |element|
@@ -115,8 +101,8 @@ class Townhall
 
 ####méthode perform
   def perform
-    #save_as_JSON(get_townhall_email(get_townhall_urls))
-    #save_as_spreadsheet(get_townhall_email(get_townhall_urls))
+    save_as_JSON(get_townhall_email(get_townhall_urls))
+    save_as_spreadsheet(get_townhall_email(get_townhall_urls))
     save_as_csv(get_townhall_email(get_townhall_urls))
   end
 
