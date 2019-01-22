@@ -102,9 +102,10 @@ class Townhall
 ####méthode perform
   def perform
     save_as_JSON(get_townhall_email(get_townhall_urls))
-    save_as_spreadsheet(get_townhall_email(get_townhall_urls))
+    #save_as_spreadsheet(get_townhall_email(get_townhall_urls))
     save_as_csv(get_townhall_email(get_townhall_urls))
   end
 
 end
+
 #######################################################################################################################
